@@ -60,7 +60,7 @@ export default async function ReviewPage({ searchParams }: { searchParams: Promi
     <div className="pt-4 space-y-4">
       <Back href={back}>{subject ? subject.name : "Today"}</Back>
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">{title}</h1>
+        <h1 className="text-2xl font-semibold tracking-tight">{title}</h1>
         {intro && <p className="text-ink-2 mt-2 max-w-[52ch]">{intro}</p>}
       </div>
       {items.length === 0 ? (

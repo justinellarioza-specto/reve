@@ -9,10 +9,10 @@
 :root {
   --paper: #f7f6f2;
   --surface: #ffffff;
-  --sunk: #efede6;
+  --sunk: #f0efe9;
   --ink: #13233f;
   --ink-2: #4d5b76;
-  --line: #dedcd4;
+  --line: #e7e5de;
   --accent: #ee6c1f;      /* fill; navy text on top */
   --accent-ink: #a84a0c;  /* orange text on paper */
   --on-accent: #13233f;
@@ -27,11 +27,11 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --paper: #0e1628;
-    --surface: #17213a;
-    --sunk: #121b31;
+    --surface: #141d33;
+    --sunk: #131c31;
     --ink: #eceff5;
     --ink-2: #a3aec4;
-    --line: #283453;
+    --line: #222c45;
     --accent: #ff8a3d;
     --accent-ink: #ffa266;
     --on-accent: #0e1628;
@@ -64,7 +64,7 @@
 html {
   background: var(--paper);
   color: var(--ink);
-  font-size: 106.25%; /* 17px base: big, readable type */
+  font-size: 100%; /* 16px base */
   -webkit-tap-highlight-color: transparent;
 }
 body {
@@ -75,7 +75,7 @@ body {
 }
 
 :focus-visible {
-  outline: 3px solid var(--accent);
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
   border-radius: 6px;
 }
@@ -86,36 +86,41 @@ body {
 
 /* ── Building blocks ─────────────────────────────── */
 @utility btn {
-  @apply inline-flex items-center justify-center gap-2 rounded-full px-5 min-h-12 font-semibold text-[1rem] transition-[transform,background-color] select-none;
+  @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 min-h-11 font-medium text-[0.95rem] transition-[transform,background-color] select-none;
   &:active { transform: scale(.98); }
   &:disabled { opacity: .5; pointer-events: none; }
 }
 @utility btn-primary {
-  @apply btn bg-accent text-on-accent;
-  &:hover { filter: brightness(1.04); }
+  @apply btn bg-ink text-paper;
+  &:hover { opacity: .9; }
 }
 @utility btn-quiet {
-  @apply btn border border-line bg-surface text-ink;
+  @apply btn border border-line bg-transparent text-ink;
   &:hover { background: var(--sunk); }
 }
 @utility btn-ghost {
   @apply btn px-3 text-ink-2;
   &:hover { color: var(--ink); background: var(--sunk); }
 }
-@utility btn-sm { @apply min-h-10 px-4 text-sm; }
+@utility btn-sm { @apply min-h-9 px-3 text-sm; }
 @utility field {
-  @apply w-full rounded-xl border border-line bg-surface px-4 py-3 text-ink outline-none;
+  @apply w-full rounded-xl border border-line bg-surface px-3.5 py-2.5 text-ink outline-none;
   &::placeholder { color: color-mix(in srgb, var(--ink-2) 75%, transparent); }
   &:focus { border-color: var(--ink); }
 }
-@utility label { @apply block text-sm font-semibold text-ink mb-1.5; }
+@utility label { @apply block text-sm font-medium text-ink-2 mb-1.5; }
 @utility link {
   @apply text-accent-ink underline underline-offset-4 decoration-1;
   &:hover { text-decoration-thickness: 2px; }
 }
 @utility rule { @apply border-t border-line; }
-@utility chip { @apply inline-flex items-center rounded-full border border-line bg-surface px-3 py-1 text-sm text-ink-2; }
+@utility chip { @apply inline-flex items-center rounded-full border border-line px-3 py-1 text-sm text-ink-2; }
 
 /* Chat bubbles appear with a tiny rise — the only ambient motion in the app. */
 @keyframes rise { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
 .rise { animation: rise .18s ease-out both; }
+
+/* Simple list row used for navigation lists: text left, chevron right. */
+@utility row {
+  @apply flex items-center gap-3 py-3.5;
+}

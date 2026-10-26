@@ -44,7 +44,7 @@ export function SubjectForm({
         <input id="exam_date" name="exam_date" type="date" defaultValue={initial?.exam_date ?? ""} className="field" />
       </div>
       {state?.error && <p role="alert" className="text-bad font-semibold">{state.error}</p>}
-      <button className="btn-primary w-full sm:w-auto sm:px-8" disabled={pending}>{pending ? "Saving…" : submitLabel}</button>
+      <button className="btn-primary w-full sm:w-auto" disabled={pending}>{pending ? "Saving…" : submitLabel}</button>
     </form>
   );
 }

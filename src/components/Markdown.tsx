@@ -26,7 +26,7 @@ export function Markdown({ source }: { source: string }) {
     if (/^[-*]\s+/.test(line)) list.push(line.replace(/^[-*]\s+/, ""));
     else if (/^#{1,3}\s+/.test(line)) {
       flush();
-      blocks.push(<h2 key={`h-${blocks.length}`} className="text-lg font-bold mt-2 mb-3">{line.replace(/^#+\s+/, "")}</h2>);
+      blocks.push(<h2 key={`h-${blocks.length}`} className="text-lg font-semibold mt-2 mb-3">{line.replace(/^#+\s+/, "")}</h2>);
     } else if (line) {
       flush();
       blocks.push(<p key={`p-${blocks.length}`} className="mb-4">{inline(line, `p-${blocks.length}`)}</p>);

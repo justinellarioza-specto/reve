@@ -14,7 +14,7 @@ export function UploadForm({ action }: { action: (s: FormState, f: FormData) => 
       <div role="tablist" aria-label="How to add material" className="inline-flex rounded-full bg-sunk p-1">
         {(["file", "paste"] as const).map((t) => (
           <button key={t} type="button" role="tab" aria-selected={tab === t} onClick={() => setTab(t)}
-            className={`rounded-full px-5 py-2 text-[15px] font-semibold ${tab === t ? "bg-surface text-ink shadow-[inset_0_0_0_1px_var(--line)]" : "text-ink-2"}`}>
+            className={`rounded-full px-5 py-2 text-[15px] font-semibold ${tab === t ? "bg-surface text-ink border border-line" : "text-ink-2"}`}>
             {t === "file" ? "Upload files" : "Paste notes"}
           </button>
         ))}
@@ -33,7 +33,7 @@ export function UploadForm({ action }: { action: (s: FormState, f: FormData) => 
               setNames(Array.from(e.dataTransfer.files).map((f) => f.name));
             }
           }}
-          className={`flex flex-col items-center justify-center text-center gap-2 rounded-3xl border-2 border-dashed px-6 py-12 cursor-pointer ${drag ? "border-accent bg-surface" : "border-line hover:border-ink-2"}`}
+          className={`flex flex-col items-center justify-center text-center gap-2 rounded-2xl border-2 border-dashed px-6 py-12 cursor-pointer ${drag ? "border-accent bg-surface" : "border-line hover:border-ink-2"}`}
         >
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden className="text-ink-2">
             <path d="M12 16V4m0 0-4 4m4-4 4 4M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3" />
@@ -59,7 +59,7 @@ export function UploadForm({ action }: { action: (s: FormState, f: FormData) => 
 
       {state?.error && <p role="alert" className="text-bad font-semibold">{state.error}</p>}
       <div className="flex items-center gap-4">
-        <button className="btn-primary sm:px-8" disabled={pending}>{pending ? "Reading your material…" : "Make my lessons"}</button>
+        <button className="btn-primary" disabled={pending}>{pending ? "Reading your material…" : "Make my lessons"}</button>
         {pending && <span className="text-sm text-ink-2" aria-live="polite">This takes a few seconds per file.</span>}
       </div>
     </form>

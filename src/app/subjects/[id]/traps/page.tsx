@@ -25,8 +25,8 @@ export default async function TrapsPage({ params }: { params: Promise<{ id: stri
   return (
     <div className="pt-4 space-y-6">
       <Back href={`/subjects/${id}`}>{subject.name}</Back>
-      <article className="rounded-[28px] bg-surface p-6 sm:p-8 shadow-[inset_0_0_0_1px_var(--line)]">
-        <h1 className="text-[1.9rem] font-bold tracking-tight leading-tight mb-1">Traps &amp; look-alikes</h1>
+      <article className="rounded-2xl bg-surface p-6 sm:p-8 border border-line">
+        <h1 className="text-2xl font-semibold tracking-tight leading-tight mb-1">Traps &amp; look-alikes</h1>
         <p className="text-ink-2 mb-6">{subject.name} — read this the night before. Then close it and sleep.</p>
         {error ? <p role="alert" className="text-bad">{error}</p> : <Markdown source={md} />}
       </article>

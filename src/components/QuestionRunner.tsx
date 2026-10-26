@@ -100,8 +100,8 @@ export function QuestionRunner({
     return (
       <div className="pt-6 space-y-8">
         <div>
-          <p className="text-ink-2 font-semibold">{title} — done</p>
-          <h2 className="text-[2.2rem] font-bold tracking-tight leading-tight mt-1">
+          <p className="text-sm text-ink-2">{title} — done</p>
+          <h2 className="text-2xl font-semibold tracking-tight leading-tight mt-1">
             {right} of {outcomes.length} on the first try
           </h2>
           <p className="text-ink-2 mt-2 max-w-[48ch]">
@@ -112,7 +112,7 @@ export function QuestionRunner({
         </div>
         {missed.length > 0 && (
           <section aria-labelledby="missed-h">
-            <h3 id="missed-h" className="font-bold mb-2">Worth another look</h3>
+            <h3 id="missed-h" className="font-semibold mb-2">Worth another look</h3>
             <ul className="divide-y divide-line border-y border-line">
               {missed.map((m) => (
                 <li key={m.q.id} className="py-3">
@@ -128,7 +128,7 @@ export function QuestionRunner({
             </div>
           </section>
         )}
-        <Link href={doneHref} className="btn-primary w-full sm:w-auto sm:px-8">{doneLabel}</Link>
+        <Link href={doneHref} className="btn-primary w-full sm:w-auto">{doneLabel}</Link>
       </div>
     );
   }
@@ -141,18 +141,18 @@ export function QuestionRunner({
       <div className="flex items-center gap-3" aria-label={`Question ${i + 1} of ${items.length}`}>
         <div className="flex-1 flex gap-1" aria-hidden>
           {items.map((_, k) => (
-            <span key={k} className="h-1.5 flex-1 rounded-full" style={{ background: k < i ? q.color : k === i ? "var(--ink-2)" : "var(--ring-track)" }} />
+            <span key={k} className="h-1 flex-1 rounded-full" style={{ background: k < i ? q.color : k === i ? "var(--ink-2)" : "var(--ring-track)" }} />
           ))}
         </div>
         <span className="text-sm tabular-nums text-ink-2">{i + 1}/{items.length}</span>
       </div>
 
       <div>
-        <p className="text-sm font-semibold text-ink-2">
+        <p className="text-sm text-ink-2">
           {q.topic_title} · {q.type === "mcq" ? "Choose one" : q.type === "tf" ? "True or false?" : q.type === "fill" ? "Fill in the blank" : "Spot the error"}
         </p>
         {q.type === "spot_error" && <p className="mt-2 text-ink-2">Which part of this statement is wrong?</p>}
-        <h2 className={`mt-2 text-[1.45rem] leading-snug font-semibold text-balance ${q.type === "spot_error" ? "rounded-2xl bg-sunk px-4 py-3 font-normal" : ""}`}>
+        <h2 className={`mt-2 text-xl leading-snug font-medium text-balance ${q.type === "spot_error" ? "rounded-2xl bg-sunk px-4 py-3 font-normal" : ""}`}>
           {q.type === "fill"
             ? q.prompt.split("_____").map((part, k, arr) => (
                 <span key={k}>
@@ -174,11 +174,10 @@ export function QuestionRunner({
           {opts.map((o, k) => {
             const chosen = given === o;
             const isAnswer = result && (q.type === "tf" ? label(o) === result.answer : o === result.answer);
-            const state = result ? (isAnswer ? "border-good bg-good-bg" : chosen ? "border-bad bg-bad-bg" : "border-line opacity-60") : chosen ? "border-ink bg-surface shadow-[inset_0_0_0_1px_var(--ink)]" : "border-line bg-surface hover:border-ink-2";
+            const state = result ? (isAnswer ? "border-good bg-good-bg" : chosen ? "border-bad bg-bad-bg" : "border-line opacity-60") : chosen ? "border-ink bg-surface" : "border-line bg-surface hover:border-ink-2";
             return (
               <button key={o} type="button" role="radio" aria-checked={chosen} disabled={!!result} onClick={() => setGiven(o)}
-                className={`flex items-center gap-3 text-left rounded-2xl border px-4 py-3.5 min-h-14 ${state}`}>
-                <span className="size-6 shrink-0 grid place-items-center rounded-full border border-line text-xs font-semibold tabular-nums text-ink-2" aria-hidden>{k + 1}</span>
+                className={`flex items-center gap-3 text-left rounded-xl border px-4 py-3 min-h-12 ${state}`}>
                 <span className="flex-1">{label(o)}</span>
               </button>
             );
@@ -191,20 +190,20 @@ export function QuestionRunner({
           {hints > 0 && q.hint && <p className="rounded-2xl bg-sunk px-4 py-3"><span className="font-semibold">Hint: </span>{q.hint}</p>}
           {error && <p role="alert" className="text-bad">{error}</p>}
           <div className="flex items-center gap-2">
-            <button onClick={check} disabled={!given.trim() || busy} className="btn-primary flex-1 sm:flex-none sm:px-10">{busy ? "Checking…" : "Check"}</button>
+            <button onClick={check} disabled={!given.trim() || busy} className="btn-primary flex-1 sm:flex-none">{busy ? "Checking…" : "Check"}</button>
             {q.hint && hints === 0 && <button onClick={() => setHints(1)} className="btn-ghost">Hint</button>}
           </div>
-          <p className="text-sm text-ink-2">Commit to an answer first — even a guess helps you remember.</p>
+          
         </div>
       )}
 
       {result && (
-        <div role="status" className={`rise rounded-3xl px-5 py-4 ${result.correct ? "bg-good-bg" : "bg-bad-bg"}`}>
-          <p className={`font-bold ${result.correct ? "text-good" : "text-bad"}`}>{result.correct ? (hints ? "Right — with a hint." : "Right.") : "Not quite."}</p>
+        <div role="status" className={`rise rounded-xl border-l-4 px-4 py-3 bg-surface ${result.correct ? "border-good" : "border-bad"}`}>
+          <p className={`font-semibold ${result.correct ? "text-good" : "text-bad"}`}>{result.correct ? (hints ? "Right — with a hint." : "Right.") : "Not quite."}</p>
           {!result.correct && <p className="mt-1">Answer: <span className="font-semibold">{result.answer}</span></p>}
           {result.explanation && <p className="mt-2"><span className="font-semibold">Why: </span>{result.explanation}</p>}
           {result.source_label && <p className="mt-2 text-sm text-ink-2">From {result.source_label}</p>}
-          <button ref={nextBtn} onClick={next} className="btn-primary mt-4 w-full sm:w-auto sm:px-10">{i + 1 < items.length ? "Next" : "See results"}</button>
+          <button ref={nextBtn} onClick={next} className="btn-primary mt-4 w-full sm:w-auto">{i + 1 < items.length ? "Next" : "See results"}</button>
         </div>
       )}
     </div>

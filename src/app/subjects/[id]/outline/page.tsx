@@ -25,7 +25,7 @@ export default async function OutlinePage({ params, searchParams }: { params: Pr
     <div className="pt-4 space-y-6">
       <Back href={`/subjects/${id}`}>{subject.name}</Back>
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">Outline</h1>
+        <h1 className="text-2xl font-semibold tracking-tight">Outline</h1>
         {added ? (
           <p role="status" className="mt-3 rounded-2xl bg-good-bg text-good px-4 py-3 font-semibold">
             Added {added} {added === "1" ? "topic" : "topics"}. Check the outline below — rename, reorder or remove anything that&apos;s off.
@@ -39,7 +39,7 @@ export default async function OutlinePage({ params, searchParams }: { params: Pr
         {topics.map((t, i) => {
           const cs = concepts.filter((c) => c.topic_id === t.id);
           return (
-            <li key={t.id} className="rounded-3xl bg-surface shadow-[inset_0_0_0_1px_var(--line)]">
+            <li key={t.id} className="rounded-2xl bg-surface border border-line">
               <details open={!!added && i >= topics.length - Number(added)}>
                 <summary className="flex items-center gap-3 px-5 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
                   <span className="text-ink-2 tabular-nums font-semibold w-6">{i + 1}</span>
@@ -109,7 +109,7 @@ export default async function OutlinePage({ params, searchParams }: { params: Pr
         <button className="btn-quiet shrink-0">Add</button>
       </form>
 
-      <Link href={`/subjects/${id}`} className="btn-primary w-full sm:w-auto sm:px-8">Looks good</Link>
+      <Link href={`/subjects/${id}`} className="btn-primary w-full sm:w-auto">Looks good</Link>
     </div>
   );
 }

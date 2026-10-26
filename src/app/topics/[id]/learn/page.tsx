@@ -49,7 +49,7 @@ export default async function LearnPage({ params, searchParams }: { params: Prom
         <nav aria-label="Mode" className="inline-flex rounded-full bg-sunk p-1">
           {MODES.map((m) => (
             <Link key={m.mode} href={`/topics/${id}/learn?mode=${m.mode}`} aria-current={m.mode === mode ? "page" : undefined}
-              className={`rounded-full px-4 py-1.5 text-[15px] font-semibold ${m.mode === mode ? "bg-surface text-ink shadow-[inset_0_0_0_1px_var(--line)]" : "text-ink-2"}`}>
+              className={`rounded-full px-4 py-1.5 text-[15px] font-semibold ${m.mode === mode ? "bg-surface text-ink border border-line" : "text-ink-2"}`}>
               {m.label}
             </Link>
           ))}

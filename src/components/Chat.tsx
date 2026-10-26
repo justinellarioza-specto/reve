@@ -63,7 +63,7 @@ export function Chat({ sessionId, mode, initial }: { sessionId: string; mode: st
           ) : (
             <li key={m.id} className="rise flex justify-end">
               <p className="sr-only">You:</p>
-              <p className="max-w-[85%] rounded-3xl rounded-br-lg bg-ink text-paper px-4 py-2.5 whitespace-pre-wrap">{m.content}</p>
+              <p className="max-w-[85%] rounded-2xl rounded-br-lg bg-ink text-paper px-4 py-2.5 whitespace-pre-wrap">{m.content}</p>
             </li>
           ),
         )}

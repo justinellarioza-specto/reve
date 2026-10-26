@@ -3,7 +3,6 @@ import Link from "next/link";
 import { Boot } from "@/components/Boot";
 import { Mark } from "@/components/Mark";
 import { BottomNav, TopNav } from "@/components/Nav";
-import { isDemo, isMockAI } from "@/lib/config";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -25,8 +24,6 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const demo = isDemo();
-  const mock = isMockAI();
   return (
     <html lang="en">
       <body>
@@ -34,18 +31,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Boot />
         <header className="mx-auto max-w-2xl px-4 sm:px-6 pt-[max(env(safe-area-inset-top),12px)]">
           <div className="flex items-center justify-between h-14">
-            <Link href="/" className="flex items-center gap-2 text-xl font-bold tracking-tight" aria-label="Reve home">
-              <Mark />
+            <Link href="/" className="flex items-center gap-2 text-lg font-semibold tracking-tight" aria-label="Reve home">
+              <Mark size={22} />
               reve
             </Link>
             <TopNav />
           </div>
-          {(demo || mock) && (
-            <p className="text-[13px] text-ink-2 pb-1">
-              {demo && mock ? "Demo mode — data is saved on this server and the tutor is a simple offline stand-in. " : demo ? "Demo mode — data is saved on this server, not in Supabase. " : "Offline tutor — add a Gemini key for the real Reve. "}
-              <a className="link" href="https://github.com/justinellarioza-specto/reve#setup">Setup</a>
-            </p>
-          )}
         </header>
         <main id="main" className="mx-auto max-w-2xl px-4 sm:px-6 pb-28 sm:pb-16">
           {children}
