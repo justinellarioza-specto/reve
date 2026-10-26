@@ -38,8 +38,8 @@ export default async function LearnPage({ params, searchParams }: { params: Prom
     <div className="pt-4 flex flex-col min-h-[calc(100dvh-5rem)]">
       <div className="space-y-3">
         <div className="flex items-center justify-between gap-2">
-          <Back href={`/topics/${id}`}>{topic.title}</Back>
-          <div className="flex items-center">
+          <div className="min-w-0 flex-1"><Back href={`/topics/${id}`}>{topic.title}</Back></div>
+          <div className="flex items-center shrink-0 whitespace-nowrap">
             <Link href={`/topics/${id}/check`} className="btn-ghost btn-sm">Quick Check</Link>
             <form action={newChatAction.bind(null, id, mode)}>
               <button className="btn-ghost btn-sm">New chat</button>

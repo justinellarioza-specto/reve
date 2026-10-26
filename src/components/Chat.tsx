@@ -109,7 +109,7 @@ export function Chat({ sessionId, mode, initial }: { sessionId: string; mode: st
                 send(text);
               }
             }}
-            placeholder={mode === "explain" ? "Explain it in your own words…" : "Type your answer… (Taglish is fine)"}
+            placeholder={mode === "explain" ? "Explain it in your words" : "Your answer (Taglish OK)"}
             className="field resize-none min-h-12 max-h-40 py-3"
             autoFocus
           />
