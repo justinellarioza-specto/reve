@@ -40,7 +40,7 @@ export default async function SubjectPage({ params }: { params: Promise<{ id: st
         </p>
       </div>
 
-      <NextCard step={step} />
+      <NextCard step={step} compact />
 
       <section aria-labelledby="topics-h">
         <div className="flex items-center justify-between">

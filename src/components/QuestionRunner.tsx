@@ -100,7 +100,7 @@ export function QuestionRunner({
     return (
       <div className="pt-6 space-y-8">
         <div>
-          <p className="text-sm text-ink-2">{title} — done</p>
+          
           <h2 className="text-2xl font-semibold tracking-tight leading-tight mt-1">
             {right} of {outcomes.length} on the first try
           </h2>
@@ -148,11 +148,7 @@ export function QuestionRunner({
       </div>
 
       <div>
-        <p className="text-sm text-ink-2">
-          {q.topic_title} · {q.type === "mcq" ? "Choose one" : q.type === "tf" ? "True or false?" : q.type === "fill" ? "Fill in the blank" : "Spot the error"}
-        </p>
-        {q.type === "spot_error" && <p className="mt-2 text-ink-2">Which part of this statement is wrong?</p>}
-        <h2 className={`mt-2 text-xl leading-snug font-medium text-balance ${q.type === "spot_error" ? "rounded-2xl bg-sunk px-4 py-3 font-normal" : ""}`}>
+        <h2 className={`text-xl leading-snug font-medium text-balance ${q.type === "spot_error" ? "rounded-2xl bg-sunk px-4 py-3 font-normal" : ""}`}>
           {q.type === "fill"
             ? q.prompt.split("_____").map((part, k, arr) => (
                 <span key={k}>
@@ -163,6 +159,10 @@ export function QuestionRunner({
             : q.prompt}
         </h2>
       </div>
+
+      <p className="text-sm text-ink-2 -mt-3">
+        {q.type === "mcq" ? "Choose one." : q.type === "tf" ? "True or false?" : q.type === "fill" ? "Type the missing word." : "Which part is wrong?"}
+      </p>
 
       {q.type === "fill" ? (
         <form onSubmit={(e) => { e.preventDefault(); check(); }}>
@@ -198,8 +198,13 @@ export function QuestionRunner({
       )}
 
       {result && (
-        <div role="status" className={`rise rounded-xl border-l-4 px-4 py-3 bg-surface ${result.correct ? "border-good" : "border-bad"}`}>
-          <p className={`font-semibold ${result.correct ? "text-good" : "text-bad"}`}>{result.correct ? (hints ? "Right — with a hint." : "Right.") : "Not quite."}</p>
+        <div role="status" className="rise rounded-xl border border-line px-4 py-3 bg-surface">
+          <p className={`flex items-center gap-2 font-semibold ${result.correct ? "text-good" : "text-bad"}`}>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <path d={result.correct ? "M5 12.5l4.5 4.5L19 7.5" : "M7 7l10 10M17 7L7 17"} />
+            </svg>
+            {result.correct ? (hints ? "Right, with a hint" : "Right") : "Not quite"}
+          </p>
           {!result.correct && <p className="mt-1">Answer: <span className="font-semibold">{result.answer}</span></p>}
           {result.explanation && <p className="mt-2"><span className="font-semibold">Why: </span>{result.explanation}</p>}
           {result.source_label && <p className="mt-2 text-sm text-ink-2">From {result.source_label}</p>}

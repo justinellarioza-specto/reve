@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Chevron } from "@/components/Chevron";
 import { NextCard } from "@/components/NextCard";
-import { Ring } from "@/components/Ring";
 import { currentUser, timeZone } from "@/lib/auth";
 import { isDemo, isMockAI } from "@/lib/config";
 import { diffDays, formatDay, streakFrom } from "@/lib/dates";
@@ -19,14 +18,17 @@ export default async function Home() {
 
   return (
     <div className="space-y-8 pt-2">
+      <div className="space-y-1">
       <p className="text-sm text-ink-2">
         {formatDay(summary.today, { weekday: "long", month: "long", day: "numeric" })}
         {streak > 0 && ` · ${streak}-day streak`}
       </p>
 
       <NextCard step={step} />
+      </div>
 
-      <ul className="divide-y divide-line">
+      {!step.href.startsWith("/review") || step.href.includes("mixed") ? (
+      <ul className="divide-y divide-line border-y border-line">
         <li>
           <Link href="/review" className="row">
             <span className="flex-1">Today&apos;s review</span>
@@ -35,8 +37,9 @@ export default async function Home() {
           </Link>
         </li>
       </ul>
+      ) : null}
 
-      <section aria-labelledby="subjects-h">
+      <section aria-labelledby="subjects-h" className="pt-2">
         <div className="flex items-center justify-between">
           <h2 id="subjects-h" className="text-sm font-medium text-ink-2">Subjects</h2>
           <Link href="/subjects/new" className="text-sm text-ink-2 hover:text-ink px-2 py-1">+ Add</Link>
@@ -50,13 +53,14 @@ export default async function Home() {
               return (
                 <li key={s.id}>
                   <Link href={`/subjects/${s.id}`} className="row">
-                    <Ring value={s.mastery} color={s.color} label={`${s.name}: ${s.mastery}% mastered`} />
+                    <span aria-hidden className="size-2.5 rounded-full shrink-0" style={{ background: s.color }} />
                     <span className="flex-1 min-w-0">
                       <span className="block truncate">{s.name}</span>
                       <span className="block text-sm text-ink-2">
                         {left === null ? `${s.topic_count} topics` : left > 1 ? `Exam in ${left} days` : left === 1 ? "Exam tomorrow" : left === 0 ? "Exam today" : "Exam done"}
                       </span>
                     </span>
+                    <span className="text-sm tabular-nums text-ink-2">{s.mastery}%</span>
                     <Chevron />
                   </Link>
                 </li>

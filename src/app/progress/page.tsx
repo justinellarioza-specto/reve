@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { signOutAction } from "@/app/actions";
-import { Ring } from "@/components/Ring";
 import { currentUser, timeZone } from "@/lib/auth";
 import { dayIn, addDays, streakFrom } from "@/lib/dates";
 import * as repo from "@/lib/repo";
@@ -56,10 +55,9 @@ export default async function ProgressPage() {
             <ul className="divide-y divide-line">
               {weak.map((w) => (
                 <li key={w.id} className="flex items-center gap-4 py-3">
-                  <Ring value={w.mastery} label={`${w.name}: ${w.mastery}%`} />
                   <span className="flex-1 min-w-0">
                     <span className="block">{w.name}</span>
-                    <span className="block text-sm text-ink-2 truncate">{w.subject_name} · {w.topic_title}{w.misses > 0 && ` · missed ${w.misses}×`}</span>
+                    <span className="block text-sm text-ink-2 truncate">{w.topic_title} · {w.mastery}%{w.misses > 0 && ` · missed ${w.misses}×`}</span>
                   </span>
                   <Link href={`/topics/${w.topic_id}/learn?mode=teach`} className="text-sm text-ink-2 hover:text-ink px-2 py-1 shrink-0" aria-label={`Talk ${w.name} through with Reve`}>Ask Reve</Link>
                 </li>

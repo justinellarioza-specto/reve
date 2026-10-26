@@ -21,6 +21,8 @@
   --bad: #b42318;
   --bad-bg: #fbe9e7;
   --ring-track: #e4e1d8;
+  --primary: #13233f;
+  --on-primary: #f7f6f2;
   color-scheme: light;
 }
 
@@ -40,6 +42,8 @@
     --bad: #ff8a80;
     --bad-bg: #3a1c1d;
     --ring-track: #253150;
+    --primary: #2b3a5e;
+    --on-primary: #eceff5;
     color-scheme: dark;
   }
 }
@@ -74,10 +78,18 @@ body {
   font-feature-settings: "ss01";
 }
 
-:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-  border-radius: 6px;
+:root { --selection: color-mix(in srgb, var(--accent) 28%, transparent); }
+::selection { background: var(--selection); color: var(--ink); }
+input, textarea { caret-color: var(--accent); }
+html { scrollbar-color: var(--line) transparent; }
+.tabular-nums, time { font-variant-numeric: tabular-nums; }
+
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -91,7 +103,9 @@ body {
   &:disabled { opacity: .5; pointer-events: none; }
 }
 @utility btn-primary {
-  @apply btn bg-ink text-paper;
+  @apply btn;
+  background: var(--primary);
+  color: var(--on-primary);
   &:hover { opacity: .9; }
 }
 @utility btn-quiet {
@@ -106,7 +120,8 @@ body {
 @utility field {
   @apply w-full rounded-xl border border-line bg-surface px-3.5 py-2.5 text-ink outline-none;
   &::placeholder { color: color-mix(in srgb, var(--ink-2) 75%, transparent); }
-  &:focus { border-color: var(--ink); }
+  &:focus { border-color: var(--ink-2); }
+  &:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--selection); }
 }
 @utility label { @apply block text-sm font-medium text-ink-2 mb-1.5; }
 @utility link {
