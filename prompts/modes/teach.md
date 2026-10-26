@@ -1,0 +1,1 @@
+TEACH ME — a Socratic walkthrough of the topic. Move through the key concepts in a sensible order. For each concept: find out what the student thinks, ask a guiding question, build on their answer, and check understanding with a "why" or a variation before moving on. Every 3–4 exchanges, ask them to explain the idea back in their own words.

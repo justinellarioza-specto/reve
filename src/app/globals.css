@@ -1,0 +1,121 @@
+@import "tailwindcss";
+@import "@fontsource-variable/atkinson-hyperlegible-next";
+
+/*
+  Reve design tokens.
+  Off-white paper, deep navy ink, one orange accent (used for the single main action and progress arcs).
+  All text pairs meet WCAG AA in both themes.
+*/
+:root {
+  --paper: #f7f6f2;
+  --surface: #ffffff;
+  --sunk: #efede6;
+  --ink: #13233f;
+  --ink-2: #4d5b76;
+  --line: #dedcd4;
+  --accent: #ee6c1f;      /* fill; navy text on top */
+  --accent-ink: #a84a0c;  /* orange text on paper */
+  --on-accent: #13233f;
+  --good: #1e7149;
+  --good-bg: #e3f1e9;
+  --bad: #b42318;
+  --bad-bg: #fbe9e7;
+  --ring-track: #e4e1d8;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #0e1628;
+    --surface: #17213a;
+    --sunk: #121b31;
+    --ink: #eceff5;
+    --ink-2: #a3aec4;
+    --line: #283453;
+    --accent: #ff8a3d;
+    --accent-ink: #ffa266;
+    --on-accent: #0e1628;
+    --good: #5fd49a;
+    --good-bg: #133326;
+    --bad: #ff8a80;
+    --bad-bg: #3a1c1d;
+    --ring-track: #253150;
+    color-scheme: dark;
+  }
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-sunk: var(--sunk);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-on-accent: var(--on-accent);
+  --color-good: var(--good);
+  --color-good-bg: var(--good-bg);
+  --color-bad: var(--bad);
+  --color-bad-bg: var(--bad-bg);
+  --font-sans: "Atkinson Hyperlegible Next Variable", ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 106.25%; /* 17px base: big, readable type */
+  -webkit-tap-highlight-color: transparent;
+}
+body {
+  font-family: var(--font-sans);
+  line-height: 1.55;
+  min-height: 100dvh;
+  font-feature-settings: "ss01";
+}
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+/* ── Building blocks ─────────────────────────────── */
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-full px-5 min-h-12 font-semibold text-[1rem] transition-[transform,background-color] select-none;
+  &:active { transform: scale(.98); }
+  &:disabled { opacity: .5; pointer-events: none; }
+}
+@utility btn-primary {
+  @apply btn bg-accent text-on-accent;
+  &:hover { filter: brightness(1.04); }
+}
+@utility btn-quiet {
+  @apply btn border border-line bg-surface text-ink;
+  &:hover { background: var(--sunk); }
+}
+@utility btn-ghost {
+  @apply btn px-3 text-ink-2;
+  &:hover { color: var(--ink); background: var(--sunk); }
+}
+@utility btn-sm { @apply min-h-10 px-4 text-sm; }
+@utility field {
+  @apply w-full rounded-xl border border-line bg-surface px-4 py-3 text-ink outline-none;
+  &::placeholder { color: color-mix(in srgb, var(--ink-2) 75%, transparent); }
+  &:focus { border-color: var(--ink); }
+}
+@utility label { @apply block text-sm font-semibold text-ink mb-1.5; }
+@utility link {
+  @apply text-accent-ink underline underline-offset-4 decoration-1;
+  &:hover { text-decoration-thickness: 2px; }
+}
+@utility rule { @apply border-t border-line; }
+@utility chip { @apply inline-flex items-center rounded-full border border-line bg-surface px-3 py-1 text-sm text-ink-2; }
+
+/* Chat bubbles appear with a tiny rise — the only ambient motion in the app. */
+@keyframes rise { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+.rise { animation: rise .18s ease-out both; }

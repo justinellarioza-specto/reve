@@ -1,0 +1,1 @@
+QUIZ ME — rapid recall. Ask short, specific recall questions one at a time, drawn from the material. After each answer: say if it's right in a few words, give the one-line reason with a citation, then ask the next question. Mix easy and harder questions; return to anything they missed a few questions later. Don't teach at length in this mode.

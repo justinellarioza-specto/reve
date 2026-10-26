@@ -1,0 +1,45 @@
+{
+  "name": "reve",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "tsc --noEmit",
+    "test": "vitest run",
+    "db:migrate": "node --experimental-strip-types scripts/migrate.ts",
+    "icons": "node scripts/make-icons.mjs"
+  },
+  "dependencies": {
+    "@electric-sql/pglite": "^0.5.11",
+    "@electric-sql/pglite-pgvector": "^0.0.12",
+    "@fontsource-variable/atkinson-hyperlegible-next": "^5.3.0",
+    "@google/genai": "^2.31.0",
+    "@supabase/ssr": "^0.12.7",
+    "@supabase/supabase-js": "^2.118.0",
+    "jszip": "^3.10.2",
+    "mammoth": "^1.13.0",
+    "next": "^16.4.3",
+    "postgres": "^3.4.9",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "server-only": "^0.0.1",
+    "unpdf": "^1.9.1",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/node": "^26.6.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "docx": "^9.14.0",
+    "pdf-lib": "^1.17.1",
+    "pptxgenjs": "^4.0.1",
+    "sharp": "^0.35.5",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.5"
+  }
+}
